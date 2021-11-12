@@ -1,4 +1,5 @@
 -- Insert example data into tables
+-- 
 
 INSERT INTO Person VALUES
     ('Anne', '1 Alpha Street', 'Glasgow', 'G11AA', '0111'),

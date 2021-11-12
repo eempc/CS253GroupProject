@@ -52,6 +52,11 @@ CREATE TABLE Dog (
     breed VARCHAR(50)
 );
 
+CREATE TABLE OtherPet (
+    pet_id INT PRIMARY KEY REFERENCES Pet(pet_id),
+    species VARCHAR(50)
+);
+
 CREATE TABLE Appointment (
     appointment_id INT PRIMARY KEY,
     customer_id INT REFERENCES Customer(person_id),
@@ -73,7 +78,7 @@ CREATE TABLE StaffAssignment (
 
 --- Alter Tables if necessary
 
-CREATE OR REPLACE FUNCTION PreventReceptionists()
+CREATE OR REPLACE FUNCTION PreventReceptionist()
 RETURNS trigger AS
 $$
 BEGIN
@@ -85,7 +90,7 @@ END;
 $$
 LANGUAGE 'plpgsql';
 
-CREATE TRIGGER DetectReceptionists
+CREATE TRIGGER DetectReceptionist
 BEFORE INSERT
 ON StaffAssignment
 FOR EACH ROW 
