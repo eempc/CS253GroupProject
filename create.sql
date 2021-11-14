@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS Pet;
 DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS Staff;
 DROP TABLE IF EXISTS Person;
-DROP TRIGGER IF EXISTS  DetectReceptionist;
+DROP TRIGGER IF EXISTS DetectReceptionist;
 
 --- Create Tables Here
 CREATE TABLE Person (
@@ -97,3 +97,20 @@ ON StaffAssignment
 FOR EACH ROW 
 EXECUTE PROCEDURE PreventReceptionist();
 
+CREATE OR REPLACE FUNCTION PreventInvalidAppointment()
+RETURNS trigger AS
+$$
+BEGIN
+    IF NEW.end < NEW.start THEN
+        RAISE EXCEPTION 'Meow, you seem to have mixed up start and end date times';
+    END IF;
+    RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER DetectInvalidAppointment
+BEFORE INSERT OR UPDATE
+ON Appointment
+FOR EACH ROW
+EXECUTE PROCEDURE PreventInvalidAppointment();
