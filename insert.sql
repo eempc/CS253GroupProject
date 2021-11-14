@@ -6,7 +6,8 @@ INSERT INTO Person VALUES
     (2, 'Bob', '2 Beta Road', 'Glasgow', 'G22BB', '0222'),
     (3, 'Cathy', '3 Gamma Avenue', 'Greenock', 'PA11AA', '0333'),
     (4, 'Dave', '4 Delta Road', 'Edinburgh', 'EH58BB', '0444'),
-    (5, 'Enid', '5 Epsilon Lane', 'Stirling', 'S11AA', '0555');
+    (5, 'Enid', '5 Epsilon Lane', 'Stirling', 'S11AA', '0555'),
+    (6, 'Fred', '6 Zeta Avenue', 'Glasgow', 'G66AA', '0666');
 
 INSERT INTO Customer VALUES
     (1, '2020-01-01'),
@@ -16,7 +17,8 @@ INSERT INTO Customer VALUES
 INSERT INTO Staff VALUES
     (3, 'Receptionist', 'AA111111A', 30000, '2013-03-03'),
     (4, 'Technician', 'BB222222B', 20000, '2014-04-04'),
-    (5, 'Vet', 'CC333333C', 20000, '2015-05-05');
+    (5, 'Vet', 'CC333333C', 20000, '2015-05-05'),
+    (6, 'Vet', 'DD444444C', 40000, '2016-06-06');
 
 INSERT INTO Pet VALUES
     (1, 'Mittens', 1, '2019-01-01', 'M'),
@@ -29,13 +31,16 @@ INSERT INTO Cat VALUES
     (3, true, 'Tortoiseshell');
 
 INSERT INTO Appointment VALUES
-    (1, 1, '2021-10-15 09:00', '2021-10-15 09:30');
+    (1, 1, '2021-10-15 09:00', '2021-10-15 09:30'),
+    (2, 2, '2021-10-10 10:00', '2021-10-10 11:00');
 
 INSERT INTO PetAssignment VALUES
-    (1, 1);
+    (1, 1),
+    (2, 2);
 
 INSERT INTO StaffAssignment VALUES
-    (5, 1);
+    (5, 1),
+    (5, 2);
 
 SELECT * FROM Person, Customer WHERE Person.person_id = Customer.person_id;
 SELECT * FROM Person, Staff WHERE Person.person_id = Staff.person_id;
@@ -54,8 +59,8 @@ UPDATE Staff SET salary = -5000 WHERE person_id = 5;
 UPDATE Pet SET sex = 'X' WHERE pet_id = 1;
 
 --- Check invalid appointment date times
-INSERT INTO Appointment VALUES (1000, 1, '2021-01-01 09:00', '2021-01-01 08:00');
-UPDATE Appointment SET start_dt = '2021-10-15 09:30' WHERE appointment_id = 1;
+INSERT INTO Appointment VALUES (1000, 1, '2021-01-01 09:00', '2021-01-01 08:00'); -- end time < start time
+UPDATE Appointment SET start_dt = '2021-10-15 09:30' WHERE appointment_id = 1; -- end time = start time
 
 --- Check adding a receptionist to appointments
 INSERT INTO StaffAssignment VALUES (3, 1);

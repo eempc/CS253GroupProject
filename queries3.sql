@@ -5,13 +5,28 @@
 SELECT *
 FROM Staff, Person
 WHERE Staff.person_id = Person.person_id
-WHERE Staff.position = 'Vet'
-WHERE Staff.person_id NOT IN (
+AND Staff.position = 'Vet'
+AND Staff.person_id NOT IN (
     SELECT StaffAssignment.person_id
-    FROM Appointment A, StaffAssignment
+    FROM Appointment, StaffAssignment
     WHERE Appointment.appointment_id = StaffAssignment.appointment_id
-    WHERE NOT (A.end < '2021-01-01 09:00'
+    AND NOT (Appointment.end_dt < '2021-10-15 09:00'
                 OR
-                A.start > '2021-01-01 10:00'
+                Appointment.start_dt > '2021-10-15 10:00'
+    )
+);
+
+-- Get a list of vets who are busy between the two times in the query
+SELECT *
+FROM Staff, Person
+WHERE Staff.person_id = Person.person_id
+AND Staff.position = 'Vet'
+AND Staff.person_id IN (
+    SELECT StaffAssignment.person_id
+    FROM Appointment, StaffAssignment
+    WHERE Appointment.appointment_id = StaffAssignment.appointment_id
+    AND NOT (Appointment.end_dt < '2021-10-15 09:00'
+                OR
+                Appointment.start_dt > '2021-10-15 10:00'
     )
 );
