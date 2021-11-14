@@ -83,7 +83,7 @@ CREATE OR REPLACE FUNCTION PreventReceptionist()
 RETURNS trigger AS
 $$
 BEGIN
-    IF (SELECT position FROM Staff WHERE NEW.person_id = staff.person_id) = 'Receptionist' THEN
+    IF NEW.position = 'Receptionist' THEN
         RAISE EXCEPTION 'Meow, you cannot have receptionists assigned to an appointment';
     END IF;
     RETURN NEW;
