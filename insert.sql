@@ -33,15 +33,18 @@ INSERT INTO Cat VALUES
 
 INSERT INTO Appointment VALUES
     (1, 1, '2021-10-15 09:00', '2021-10-15 09:30'),
-    (2, 2, '2021-10-10 10:00', '2021-10-10 11:00');
+    (2, 2, '2021-10-10 10:00', '2021-10-10 11:00'),
+    (2, 2, '2021-10-11 10:00', '2021-10-11 11:00');
 
 INSERT INTO PetAssignment VALUES
     (1, 1),
-    (2, 2);
+    (2, 2),
+    (3, 2);
 
 INSERT INTO StaffAssignment VALUES
     (1, 5),
-    (2, 5);
+    (2, 5),
+    (3, 6);
 
 -- Insert Jack's data here
 
