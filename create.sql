@@ -82,7 +82,7 @@ CREATE TABLE StaffAssignment (
     PRIMARY KEY(staff_id, appointment_id)
 );
 
---- Alter Tables if necessary
+--- Alter Tables if necessary, add triggers and functions
 
 CREATE OR REPLACE FUNCTION PreventReceptionist()
 RETURNS trigger AS

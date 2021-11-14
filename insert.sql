@@ -1,5 +1,6 @@
 -- Insert example data into tables
--- 
+
+-- Insert Evelyn's data here
 
 INSERT INTO Person VALUES
     (1, 'Anne', '1 Alpha Street', 'Glasgow', 'G11AA', '0111'),
@@ -41,6 +42,17 @@ INSERT INTO PetAssignment VALUES
 INSERT INTO StaffAssignment VALUES
     (5, 1),
     (5, 2);
+
+-- Insert Jack's data here
+
+
+
+-- Insert Alex's data here
+
+
+
+
+-- Select output checks
 
 SELECT * FROM Person, Customer WHERE Person.person_id = Customer.customer_id;
 SELECT * FROM Person, Staff WHERE Person.person_id = Staff.staff_id;
