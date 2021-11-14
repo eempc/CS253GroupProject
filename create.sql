@@ -1,8 +1,9 @@
 -- Create Tables
 
+-- Drop triggers here
 DROP TRIGGER IF EXISTS DetectReceptionist ON StaffAssignment;
 
---- Drop Tables Here
+--- Drop tables here
 DROP TABLE IF EXISTS StaffAssignment;
 DROP TABLE IF EXISTS PetAssignment;
 DROP TABLE IF EXISTS Appointment;
@@ -13,7 +14,6 @@ DROP TABLE IF EXISTS Pet;
 DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS Staff;
 DROP TABLE IF EXISTS Person;
-
 
 --- Create Tables Here
 CREATE TABLE Person (
@@ -83,7 +83,6 @@ CREATE TABLE StaffAssignment (
 );
 
 --- Alter Tables if necessary, add triggers and functions
-
 CREATE OR REPLACE FUNCTION PreventReceptionist()
 RETURNS trigger AS
 $$
