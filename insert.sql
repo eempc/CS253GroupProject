@@ -40,8 +40,8 @@ INSERT INTO PetAssignment VALUES
     (2, 2);
 
 INSERT INTO StaffAssignment VALUES
-    (5, 1),
-    (5, 2);
+    (1, 5),
+    (2, 5);
 
 -- Insert Jack's data here
 
@@ -75,4 +75,4 @@ INSERT INTO Appointment VALUES (1000, 1, '2021-01-01 09:00', '2021-01-01 08:00')
 UPDATE Appointment SET start_dt = '2021-10-15 09:30' WHERE appointment_id = 1; -- end time = start time
 
 --- Check adding a receptionist to appointments
-INSERT INTO StaffAssignment VALUES (3, 1);
+INSERT INTO StaffAssignment VALUES (1, 3);
