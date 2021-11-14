@@ -1,13 +1,14 @@
 -- Create Tables
 
 --- Drop Tables Here
-DROP IF EXISTS StaffAssignment;
-DROP IF EXISTS PetAssignment;
-DROP IF EXISTS Appointment
-DROP IF EXISTS Pet;
-DROP IF EXISTS Customer;
-DROP IF EXISTS Staff;
-DROP IF EXISTS Person;
+DROP TABLE IF EXISTS StaffAssignment;
+DROP TABLE IF EXISTS PetAssignment;
+DROP TABLE IF EXISTS Appointment
+DROP TABLE IF EXISTS Pet;
+DROP TABLE IF EXISTS Customer;
+DROP TABLE IF EXISTS Staff;
+DROP TABLE IF EXISTS Person;
+DROP TRIGGER IF EXISTS  DetectReceptionist;
 
 --- Create Tables Here
 CREATE TABLE Person (
@@ -74,7 +75,7 @@ CREATE TABLE StaffAssignment (
     person_id INT REFERENCES Staff(person_id),
     appointment_id INT REFERENCES Appointment(appointment_id),
     PRIMARY KEY(person_id, appointment_id)
-)
+);
 
 --- Alter Tables if necessary
 
@@ -94,5 +95,5 @@ CREATE TRIGGER DetectReceptionist
 BEFORE INSERT
 ON StaffAssignment
 FOR EACH ROW 
-EXECUTE PROCEDURE PreventReceptionists();
+EXECUTE PROCEDURE PreventReceptionist();
 
