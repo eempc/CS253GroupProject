@@ -1,14 +1,20 @@
 -- Create Tables
 
+DROP TRIGGER IF EXISTS DetectReceptionist ON StaffAssignment;
+DROP TRIGGER IF EXISTS DetectInvalidAppointment ON Appointment;
+
 --- Drop Tables Here
 DROP TABLE IF EXISTS StaffAssignment;
 DROP TABLE IF EXISTS PetAssignment;
-DROP TABLE IF EXISTS Appointment
+DROP TABLE IF EXISTS Appointment;
+DROP TABLE IF EXISTS Cat;
+DROP TABLE IF EXISTS Dog;
+DROP TABLE IF EXISTS OtherPet;
 DROP TABLE IF EXISTS Pet;
 DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS Staff;
 DROP TABLE IF EXISTS Person;
-DROP TRIGGER IF EXISTS DetectReceptionist;
+
 
 --- Create Tables Here
 CREATE TABLE Person (
@@ -21,7 +27,7 @@ CREATE TABLE Person (
 );
 
 CREATE TABLE Staff (
-    person_id INT PRIMARY REFERENCES Person(person_id),
+    person_id INT PRIMARY KEY REFERENCES Person(person_id),
     position VARCHAR(20) NOT NULL, -- ideally should be an enum from the back end code
     ni_number CHAR(9) NOT NULL UNIQUE,
     salary NUMERIC NOT NULL CHECK (salary > 0),
@@ -61,8 +67,8 @@ CREATE TABLE OtherPet (
 CREATE TABLE Appointment (
     appointment_id INT PRIMARY KEY,
     customer_id INT REFERENCES Customer(person_id),
-    start_dt DATETIME NOT NULL,
-    end_dt DATETIME NOT NULL
+    start_dt TIMESTAMP NOT NULL CHECK (start_dt < end_dt),
+    end_dt TIMESTAMP NOT NULL CHECK (start_dt < end_dt)
 );
 
 CREATE TABLE PetAssignment (
@@ -96,21 +102,3 @@ BEFORE INSERT
 ON StaffAssignment
 FOR EACH ROW 
 EXECUTE PROCEDURE PreventReceptionist();
-
-CREATE OR REPLACE FUNCTION PreventInvalidAppointment()
-RETURNS trigger AS
-$$
-BEGIN
-    IF NEW.end < NEW.start THEN
-        RAISE EXCEPTION 'Meow, you seem to have mixed up start and end date times';
-    END IF;
-    RETURN NEW;
-END;
-$$
-LANGUAGE 'plpgsql';
-
-CREATE TRIGGER DetectInvalidAppointment
-BEFORE INSERT OR UPDATE
-ON Appointment
-FOR EACH ROW
-EXECUTE PROCEDURE PreventInvalidAppointment();
