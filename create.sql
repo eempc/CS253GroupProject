@@ -21,7 +21,7 @@ CREATE TABLE Person (
     name VARCHAR(50) NOT NULL,
     address_first_line VARCHAR(100),
     city VARCHAR(20) DEFAULT 'Glasgow',
-    postcode VARCHAR(8), -- Could try to constrain characters, or create a new table for postcodes
+    postcode VARCHAR(8),
     mobile_phone CHAR(4) UNIQUE
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE Pet (
     name VARCHAR(50) NOT NULL DEFAULT 'Unknown',
     belongs_to INT REFERENCES Customer(customer_id),
     date_of_birth DATE,
-    sex CHAR(1) NOT NULL CHECK (sex IN ('M', 'F'))
+    sex CHAR(1) CHECK (sex IN ('M', 'F'))
 );
 
 CREATE TABLE Cat (

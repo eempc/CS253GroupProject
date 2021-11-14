@@ -31,4 +31,4 @@ AND Staff.staff_id IN (
     )
 );
 
--- Get the number of appointments in a day and the average length of an appointment
+-- Get average length of an appointment

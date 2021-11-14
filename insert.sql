@@ -53,7 +53,6 @@ INSERT INTO StaffAssignment VALUES
 
 
 -- Select output checks
-
 SELECT * FROM Person, Customer WHERE Person.person_id = Customer.customer_id;
 SELECT * FROM Person, Staff WHERE Person.person_id = Staff.staff_id;
 SELECT * FROM Pet, Cat WHERE Pet.pet_id = Cat.cat_id;
