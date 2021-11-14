@@ -12,7 +12,7 @@ DROP TRIGGER IF EXISTS  DetectReceptionist;
 
 --- Create Tables Here
 CREATE TABLE Person (
-    person_id SERIAL PRIMARY KEY, -- is SERIAL the same as INT AUTO INCREMENT?
+    person_id INT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     address_first_line VARCHAR(100),
     city VARCHAR(20) DEFAULT 'Glasgow',
@@ -83,7 +83,7 @@ CREATE OR REPLACE FUNCTION PreventReceptionist()
 RETURNS trigger AS
 $$
 BEGIN
-    IF NEW.position = 'Receptionist' THEN
+    IF (SELECT position FROM Staff WHERE NEW.person_id = staff.person_id) = 'Receptionist' THEN
         RAISE EXCEPTION 'Meow, you cannot have receptionists assigned to an appointment';
     END IF;
     RETURN NEW;
