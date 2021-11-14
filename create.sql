@@ -71,14 +71,14 @@ CREATE TABLE Appointment (
 );
 
 CREATE TABLE PetAssignment (
-    pet_id INT REFERENCES Pet(pet_id),
     appointment_id INT REFERENCES Appointment(appointment_id),
+    pet_id INT REFERENCES Pet(pet_id),
     PRIMARY KEY(pet_id, appointment_id)
 );
 
 CREATE TABLE StaffAssignment (
-    staff_id INT REFERENCES Staff(staff_id),
     appointment_id INT REFERENCES Appointment(appointment_id),
+    staff_id INT REFERENCES Staff(staff_id),
     PRIMARY KEY(staff_id, appointment_id)
 );
 
