@@ -22,7 +22,7 @@ CREATE TABLE Person (
     address_first_line VARCHAR(100),
     city VARCHAR(20) DEFAULT 'Glasgow',
     postcode VARCHAR(8),
-    mobile_phone CHAR(4) UNIQUE
+    mobile_phone CHAR(11) UNIQUE
 );
 
 CREATE TABLE Staff (
