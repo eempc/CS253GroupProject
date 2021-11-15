@@ -3,12 +3,12 @@
 -- Insert Evelyn's data here
 
 INSERT INTO Person VALUES
-    (1, 'Anne', '1 Alpha Street', 'Glasgow', 'G11AA', '0111'),
-    (2, 'Bob', '2 Beta Road', 'Glasgow', 'G22BB', '0222'),
-    (3, 'Cathy', '3 Gamma Avenue', 'Greenock', 'PA11AA', '0333'),
-    (4, 'Dave', '4 Delta Road', 'Edinburgh', 'EH58BB', '0444'),
-    (5, 'Enid', '5 Epsilon Lane', 'Stirling', 'S11AA', '0555'),
-    (6, 'Fred', '6 Zeta Avenue', 'Glasgow', 'G66AA', '0666');
+    (1, 'Anne', '1 Alpha Street', 'Glasgow', 'G11AA', '07111111111'),
+    (2, 'Bob', '2 Beta Road', 'Glasgow', 'G22BB', '07222222222'),
+    (3, 'Cathy', '3 Gamma Avenue', 'Greenock', 'PA11AA', '07333333333'),
+    (4, 'Dave', '4 Delta Road', 'Edinburgh', 'EH58BB', '07444444444'),
+    (5, 'Enid', '5 Epsilon Lane', 'Stirling', 'S11AA', '07555555555'),
+    (6, 'Fred', '6 Zeta Avenue', 'Glasgow', 'G66AA', '07666666666');
 
 INSERT INTO Customer VALUES
     (1, '2020-01-01'),

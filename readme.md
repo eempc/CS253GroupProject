@@ -9,7 +9,8 @@ After you've installed Git onto your computer, start up a bash terminal in the f
 3. Click the create branch button
 4. On git bash, type the following:
     1. `git clone https://github.com/eempc/TaxiProject`
-    2. `git checkout -b <your branch name> origin/<your branch name>`
+    2. `git fetch; git pull`
+    3. `git checkout -b <your branch name> origin/<your branch name>`
 5. Start making coding changes
 6. Commit your changes by:
     1. `git add <file>`
