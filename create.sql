@@ -2,6 +2,7 @@
 
 -- Drop triggers here
 DROP TRIGGER IF EXISTS DetectReceptionist ON StaffAssignment;
+DROP TRIGGER IF EXISTS DetectDoubleBooking ON StaffAssignment;
 
 --- Drop tables here
 DROP TABLE IF EXISTS StaffAssignment;
@@ -100,3 +101,61 @@ BEFORE INSERT
 ON StaffAssignment
 FOR EACH ROW 
 EXECUTE PROCEDURE PreventReceptionist();
+
+-- This is wrong
+CREATE OR REPLACE FUNCTION PreventDoubleBooking()
+RETURNS trigger AS
+$$
+BEGIN
+    IF EXISTS (
+        SELECT staff_id
+        FROM (SELECT *
+                FROM StaffAssignment, Appointment
+                WHERE StaffAssignment.appointment_id = Appointment.appointment_id) SAA
+        WHERE NEW.staff_id = SAA.staff_id
+        AND (NEW.start_dt BETWEEN Appointment.start_dt AND Appointment end_dt
+            OR
+            NEW.end_dt BETWEEN Appointment.start_dt AND Appointment end_dt);
+        ) THEN
+    END IF;
+    RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER DetectDoubleBooking
+BEFORE INSERT OR UPDATE
+ON StaffAssignment
+FOR EACH ROW 
+EXECUTE PROCEDURE PreventDoubleBooking();
+
+-- There are two overlapping appointments
+-- Ensure that the vet is not the same in these two overlapping appointments
+-- AFTER the mock insertion, check there not two in the same time overlap
+
+(SELECT staff_id
+FROM (SELECT * FROM StaffAssignment, Appointment WHERE StaffAssignment.appointment_id = Appointment.appointment_id) SAA
+WHERE NEW.staff_id = SAA.staff_id) 
+-- The above yields a cartesian product with all the appointments for that newly assigned vet
+--- The below is better. It gets all the appointments for the NEW vet
+(SELECT *
+FROM StaffAssignment, Appointment 
+WHERE StaffAssignment.appointment_id = Appointment.appointment_id
+AND NEW.staff_id = Appointment.staff_id) SAA
+
+-- create a cartesian product of the single new assignment
+(SELECT *
+FROM StaffAssignment, Appointment 
+WHERE NEW.appointment_id = Appointment.appointment_id) SAA2
+
+SELECT * FROM SAA
+
+AND (SAA.start_dt BETWEEN SAA2.start_dt AND SAA2.end_dt) OR (SAA.end_dt BETWEEN SAA2.start_dt AND SAA2.end_dt)
+
+
+
+AND (NEW.start_dt BETWEEN Appointment.start_dt AND Appointment end_dt
+    OR
+    NEW.end_dt BETWEEN Appointment.start_dt AND Appointment end_dt);
+
+--- time to abandon this branch, it's way too difficult, RIP meowBranch3

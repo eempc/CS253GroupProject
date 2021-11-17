@@ -32,3 +32,13 @@ AND Staff.staff_id IN (
 );
 
 -- Get average length of an appointment
+
+
+SELECT *
+FROM (SELECT *
+        FROM StaffAssignment, Appointment
+        WHERE StaffAssignment.appointment_id = Appointment.appointment_id) SAA
+WHERE SAA.staff_id = 5
+AND (NEW.start_dt BETWEEN Appointment.start_dt AND Appointment end_dt
+    OR
+    NEW.end_dt BETWEEN Appointment.start_dt AND Appointment end_dt);

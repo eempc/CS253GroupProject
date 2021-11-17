@@ -32,9 +32,10 @@ INSERT INTO Cat VALUES
     (3, true, 'Tortoiseshell');
 
 INSERT INTO Appointment VALUES
-    (1, 1, '2021-10-15 09:00', '2021-10-15 09:30'),
+    (1, 1, '2021-10-15 09:00', '2021-10-15 09:30'), -- Enid has been assigned here
     (2, 2, '2021-10-10 10:00', '2021-10-10 11:00'),
-    (2, 2, '2021-10-11 10:00', '2021-10-11 11:00');
+    (3, 2, '2021-10-11 10:00', '2021-10-11 11:00'),
+    (4, 3, '2021-10-11 10:30', '2021-10-11 10:45');
 
 INSERT INTO PetAssignment VALUES
     (1, 1),
@@ -76,5 +77,8 @@ UPDATE Pet SET sex = 'X' WHERE pet_id = 1;
 INSERT INTO Appointment VALUES (1000, 1, '2021-01-01 09:00', '2021-01-01 08:00'); -- end time < start time
 UPDATE Appointment SET start_dt = '2021-10-15 09:30' WHERE appointment_id = 1; -- end time = start time
 
---- Check adding a receptionist to appointments
+--- Check adding a receptionist to appointments trigger
 INSERT INTO StaffAssignment VALUES (1, 3);
+
+--- Check for double booking
+INSERT INTO StaffAssignment VALUES (4, 6);
