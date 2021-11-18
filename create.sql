@@ -73,13 +73,13 @@ CREATE TABLE Appointment (
 CREATE TABLE PetAssignment (
     appointment_id INT REFERENCES Appointment(appointment_id),
     pet_id INT REFERENCES Pet(pet_id),
-    PRIMARY KEY(pet_id, appointment_id)
+    PRIMARY KEY(appointment_id, pet_id)
 );
 
 CREATE TABLE StaffAssignment (
     appointment_id INT REFERENCES Appointment(appointment_id),
     staff_id INT REFERENCES Staff(staff_id),
-    PRIMARY KEY(staff_id, appointment_id)
+    PRIMARY KEY(appointment_id, staff_id)
 );
 
 --- Alter Tables if necessary, add triggers and functions
