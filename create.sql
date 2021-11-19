@@ -30,12 +30,12 @@ CREATE TABLE Staff (
     position VARCHAR(20) NOT NULL, -- ideally should be an enum from the back end code
     ni_number CHAR(9) NOT NULL UNIQUE,
     salary NUMERIC NOT NULL CHECK (salary > 0),
-    start_date DATE NOT NULL
+    start_date DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
 CREATE TABLE Customer (
     customer_id INT PRIMARY KEY REFERENCES Person(person_id),
-    registration_date DATE NOT NULL
+    registration_date DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
 CREATE TABLE Pet (

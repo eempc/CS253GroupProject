@@ -35,6 +35,7 @@ FROM Pet, Cat
 WHERE Pet.pet_id = Cat.cat_id
 GROUP BY Pet.sex;
 
+-- How many males cats and female cats where there is more than one?
 SELECT Pet.sex, COUNT(*) AS CatCount
 FROM Pet, Cat
 WHERE Pet.pet_id = Cat.cat_id
@@ -47,7 +48,6 @@ SELECT position, AVG(salary) AS AvgSalary
 FROM Staff
 GROUP BY position;
 
-
 -- Any pets ever only been to one appointment?
 SELECT Pet.name, COUNT(*) 
 FROM Pet, PetAssignment 
@@ -55,7 +55,7 @@ WHERE Pet.pet_id = PetAssignment.pet_id
 GROUP BY Pet.name 
 HAVING COUNT(*) = 1;
 
--- Which staff members are slacking off and have never been on an appointment?
+-- Which technicians and vets are slacking off and have never been on an appointment?
 -- Do not include receptionists as they should be at their desk at all times
 -- The return number 1 is for efficiency, you can use * instead but it makes no difference to the row count
 SELECT staff_id, name, position, salary
@@ -68,8 +68,11 @@ AND NOT EXISTS (
     WHERE Staff.staff_id = StaffAssignment.staff_id 
 );
 
+--- Returns the existence of staff who have been assigned to appointments
 SELECT *
 FROM Staff
 WHERE EXISTS (
-    SELECT 1 FROM StaffAssignment WHERE Staff.staff_id = StaffAssignment.staff_id
+    SELECT 1 
+    FROM StaffAssignment 
+    WHERE Staff.staff_id = StaffAssignment.staff_id
 );
